@@ -1,0 +1,10 @@
+dim: 8
+bias: false
+scaling: 1.0
+norm_layer: false
+act_layer: false
+init: lora
+dropout: 0.1
+pre_dropout: true
+drop_path: 0
+

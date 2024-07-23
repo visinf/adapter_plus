@@ -1,0 +1,43 @@
+# @package _global_
+name: adapter_plus_dim1-32
+save_checkpoints: true
+val_every_n_epoch: 100
+data:
+  train_split: trainval
+  val_split: test
+dataset_dim:
+  cifar100: 1
+  caltech101: 4
+  dtd: 2
+  flowers102: 1
+  pet: 8
+  svhn: 16
+  sun397: 1
+  camelyon: 16
+  eurosat: 2
+  resisc45: 32
+  retinopathy: 32
+  clevr_count: 4
+  clevr_distance: 8
+  dmlab: 8
+  kitti: 8
+  dsprites_position: 32
+  dsprites_orientation: 4
+  smallnorb_azimuth: 32
+  smallnorb_elevation: 8
+adapter:
+  dim: ${dataset_dim[${data.dataset}]}
+hydra:
+  mode: MULTIRUN
+  sweep:
+    dir: ./output/vtab/${name}/${data.dataset}
+  sweeper:
+    params:
+      data.dataset: >-
+        cifar100,caltech101,dtd,flowers102,pet,svhn,sun397,
+        camelyon,eurosat,resisc45,retinopathy,
+        clevr_count,clevr_distance,dmlab,kitti,dsprites_position,
+        dsprites_orientation,smallnorb_azimuth,smallnorb_elevation
+      seed: 18,45,25
+
+      

@@ -1,0 +1,33 @@
+# @package _global_
+
+defaults:
+  - override /data: vtab
+  - override /lora: null
+name: houlsby_scaling
+save_checkpoints: false
+val_every_n_epoch: 100
+adapter:
+  dim: 8
+  config: post
+  act_layer: true
+  bias: true
+  norm_layer: false
+  scaling: learned
+  init: houlsby
+data:
+  train_split: train
+  val_split: val
+hydra:
+  mode: MULTIRUN
+  sweep:
+    dir: ./output/ablations/structure/${name}/${data.dataset}
+  sweeper:
+    params:
+      data.dataset: >-
+        cifar100,caltech101,dtd,flowers102,pet,svhn,sun397,
+        camelyon,eurosat,resisc45,retinopathy,
+        clevr_count,clevr_distance,dmlab,kitti,dsprites_position,
+        dsprites_orientation,smallnorb_azimuth,smallnorb_elevation
+      seed: 18,45,25
+
+      

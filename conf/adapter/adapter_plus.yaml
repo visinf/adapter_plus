@@ -1,0 +1,5 @@
+defaults:
+  - base_adapter
+
+config: post
+scaling: channel

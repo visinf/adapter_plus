@@ -1,0 +1,48 @@
+defaults:
+  - adapter: adapter_plus
+  - lora: null
+  - prompt: null
+  - train: default
+  - data: vtab
+  - override hydra/job_logging: null
+
+gpus:
+  - 0
+save_checkpoints: true
+val_every_n_epoch: 10
+vit:
+  model: vit_base_patch16_224.orig_in21k
+  drop_path: 0.1
+  finetune: false
+name: ${data.dataset_group}_${data.dataset}
+seed: 18
+
+hydra:
+  output_subdir: hydra
+  job:
+    chdir: true 
+    config:
+      override_dirname:
+        exclude_keys:
+          - seed
+          - experiment
+          - name
+  run:
+    dir: ./output/${name}
+  job_logging:
+    version: 1
+    formatters:
+      simple:
+        format: '[%(asctime)s][%(name)s][%(levelname)s] - %(message)s'
+    handlers:
+      console:
+        class: logging.StreamHandler
+        formatter: simple
+        stream: ext://sys.stdout
+    root:
+      level: ERROR
+      handlers: [console]
+    disable_existing_loggers: False
+  sweep:
+    dir: ./output/${name}/${hydra.job.override_dirname}
+    subdir: seed=${seed}

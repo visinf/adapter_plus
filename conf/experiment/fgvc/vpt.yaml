@@ -1,0 +1,29 @@
+# @package _global_
+defaults:
+  - override /data: fgvc
+  - override /adapter: null
+  - override /prompt: prepend
+name: vpt
+save_checkpoints: false
+val_every_n_epoch: 100
+dataset_tokens:
+  cub: 10
+  nabirds: 50
+  oxfordflower: 5
+  stanfordcars: 200
+  stanforddogs: 100
+prompt:
+  num_tokens: ${dataset_tokens[${data.dataset}]}
+data:
+  train_split: trainval
+  val_split: test
+hydra:
+  mode: MULTIRUN
+  sweep:
+    dir: ./output/fgvc/${name}/${data.dataset}
+  sweeper:
+    params:
+      data.dataset: cub,nabirds,oxfordflower,stanfordcars,stanforddogs
+      seed: 18,45,25
+
+      

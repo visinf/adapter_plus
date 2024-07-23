@@ -1,0 +1,35 @@
+# @package _global_
+
+defaults:
+  - override /data: vtab
+  - override /lora: null
+name: adapter_dropout_vit_nodrop
+save_checkpoints: false
+val_every_n_epoch: 100
+vit:
+  drop_path: 0
+adapter:
+  dim: 8
+  config: post
+  norm_layer: false
+  drop_path: 0
+  dropout: 0.1
+  init: houlsby
+  scaling: 1.0
+data:
+  train_split: train
+  val_split: val
+hydra:
+  mode: MULTIRUN
+  sweep:
+    dir: ./output/ablations/train_regularization/${name}/${data.dataset}
+  sweeper:
+    params:
+      data.dataset: >-
+        cifar100,caltech101,dtd,flowers102,pet,svhn,sun397,
+        camelyon,eurosat,resisc45,retinopathy,
+        clevr_count,clevr_distance,dmlab,kitti,dsprites_position,
+        dsprites_orientation,smallnorb_azimuth,smallnorb_elevation
+      seed: 18,45,25
+
+      

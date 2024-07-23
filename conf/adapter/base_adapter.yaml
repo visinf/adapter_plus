@@ -1,0 +1,9 @@
+act_layer: true
+norm_layer: false
+bias: true
+init: houlsby
+scaling: 1.0
+dim: 8
+attn_adapter: false
+dropout: 0
+drop_path: 0.1

@@ -1,0 +1,10 @@
+defaults:
+  - optimizer: adamw
+lr_factor: 1000
+lr_start_factor: 100
+label_smoothing: 0
+epochs: 100
+warmup: 10
+train_ln: false
+classifier_only: false
+gradient_clip_val: null

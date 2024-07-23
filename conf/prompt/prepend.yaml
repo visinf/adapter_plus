@@ -1,0 +1,3 @@
+num_tokens: 50
+dropout: 0.1
+config: single

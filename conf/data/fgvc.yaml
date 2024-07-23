@@ -1,0 +1,7 @@
+defaults:
+  - base_data
+
+_target_: data.fgvc.FGVCData
+data_dir: ${hydra:runtime.cwd}/datasets/fgvc
+dataset_group: fgvc
+dataset: cub

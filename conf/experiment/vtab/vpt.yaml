@@ -1,0 +1,46 @@
+# @package _global_
+defaults:
+  - override /adapter: null
+  - override /prompt: prepend
+name: vpt
+save_checkpoints: false
+val_every_n_epoch: 100
+dataset_tokens:
+  cifar100: 10
+  caltech101: 10
+  dtd: 10
+  flowers102: 1
+  pet: 1
+  svhn: 50
+  sun397: 5
+  camelyon: 100
+  eurosat: 100
+  resisc45: 10
+  retinopathy: 1
+  clevr_count: 100
+  clevr_distance: 200
+  dmlab: 100
+  kitti: 100
+  dsprites_position: 100
+  dsprites_orientation: 100
+  smallnorb_azimuth: 200
+  smallnorb_elevation: 200
+prompt:
+  num_tokens: ${dataset_tokens[${data.dataset}]}
+data:
+  train_split: trainval
+  val_split: test
+hydra:
+  mode: MULTIRUN
+  sweep:
+    dir: ./output/vtab/${name}/${data.dataset}
+  sweeper:
+    params:
+      data.dataset: >-
+        cifar100,caltech101,dtd,flowers102,pet,svhn,sun397,
+        camelyon,eurosat,resisc45,retinopathy,
+        clevr_count,clevr_distance,dmlab,kitti,dsprites_position,
+        dsprites_orientation,smallnorb_azimuth,smallnorb_elevation
+      seed: 18,45,25
+
+      

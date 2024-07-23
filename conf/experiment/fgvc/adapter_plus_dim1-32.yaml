@@ -1,0 +1,27 @@
+# @package _global_
+defaults:
+  - override /data: fgvc
+name: adapter_plus_dim1-32
+save_checkpoints: true
+val_every_n_epoch: 100
+dataset_dim:
+  nabirds: 2
+  stanfordcars: 32
+  stanforddogs: 1
+  cub: 2
+  oxfordflower: 1
+adapter:
+  dim: ${dataset_dim[${data.dataset}]}
+data:
+  train_split: trainval
+  val_split: test
+hydra:
+  mode: MULTIRUN
+  sweep:
+    dir: ./output/fgvc/${name}/${data.dataset}
+  sweeper:
+    params:
+      data.dataset: oxfordflower,nabirds,stanfordcars,stanforddogs,cub
+      seed: 18,45,25
+
+  

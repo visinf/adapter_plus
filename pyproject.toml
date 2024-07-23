@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "adapter-plus"
+version = "0.1.0"
+description = "Adapter+ implementation for vision transformer backbones from timm"
+authors = [
+    "Jan-Martin Steitz <jan-martin.steitz@visinf.tu-darmstadt.de>",
+    "Stefan Roth <stefan.roth@visinf.tu-darmstadt.de>"
+]
+repository = "https://github.com/visinf/adapter_plus"
+license = "Apache-2.0"
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+
+[tool.poetry.dependencies]
+python = ">= 3.9"
+timm = ">= 0.9"
+omegaconf = ">= 2.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

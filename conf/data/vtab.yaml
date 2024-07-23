@@ -1,0 +1,9 @@
+defaults:
+  - base_data
+
+_target_: data.vtab.VtabData
+data_dir: ${hydra:runtime.cwd}/datasets/vtab
+dataset_group: vtab
+dataset: cifar100
+train_split: train
+val_split: val
