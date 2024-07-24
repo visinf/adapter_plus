@@ -46,6 +46,8 @@ To evaluate checkpoints from previous training runs, use `eval.py` in combinatio
 python eval.py +experiment=vtab/adapter_plus_dim1-32
 ```
 
+We also released [checkpoints](https://github.com/visinf/adapter_plus/releases/tag/v0.1.0) for our main experiments. To use them, create an `output` directory inside the repository's directory and extract the archives there. This should create a structure like `output/vtab/adapter_plus_dim8`. Then evaluate as described above.
+
 ### Disclaimer
 
 Training and evaluation for the paper were done with timm 0.6.7, pytorch 1.12, and python 3.9. For the best possible usability of our pip module, we have updated the code to the latest versions. As such, the numbers on VTAB may vary slightly (we measured up to +/- 0.2 p.p. in accuracy). However, the global average accuracy across all VTAB subgroups remains unchanged.
@@ -58,7 +60,7 @@ To use our adapter implementation in your own project simply, install the pip mo
 pip install adapter-plus
 ```
 
-Besides various adapter configurations, our module also supports LoRA (without weight matrices merging for inference) and VPT-deep (without checkpointing). Please refer to the configurations in the repository's `conf` directory for details.
+Besides various adapter configurations, our module also supports LoRA (without matrices merging for inference) and VPT-deep. Please refer to the configurations in the repository's `conf` directory for details.
 Our pip module patches the `_create_vision_transformer` function of the timm library to support adapters. All vision transformers built with `Block` or `ResPostBlock` block functions are supported. 
 
 You can create an adapter-enabled vision transformer model as shown below:
